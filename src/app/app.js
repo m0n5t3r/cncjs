@@ -137,9 +137,9 @@ const appMain = () => {
     // https://github.com/senchalabs/connect
 
     { // https://github.com/valery-barysok/session-file-store
-        const path = './sessions';
+        const path = (process.env.SNAP_USER_DATA || '.') + '/sessions';
 
-        del.sync([path]);
+        del.sync([path], { force: true });
         fs.mkdirSync(path); // Defaults to ./sessions
 
         const FileStore = sessionFileStore(session);
